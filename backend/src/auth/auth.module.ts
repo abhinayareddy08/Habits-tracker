@@ -11,9 +11,11 @@ import { MysqlUserRepository } from 'src/mysql-repositories/mysql-user.repositor
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET!,
-      signOptions: { expiresIn: process.env.JWT_TOKEN_LIFETIME as any },
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET!,
+        signOptions: { expiresIn: process.env.JWT_TOKEN_LIFETIME as any },
+      }),
     }),
   ],
   controllers: [AuthController],

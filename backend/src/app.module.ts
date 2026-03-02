@@ -7,18 +7,17 @@ import { User } from './typeorm/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'abhinaya',
-      password: 'Abhinaya@0808',
-      database: 'Habits_Tracker',
-      entities:[User],
+      host: process.env.MYSQL_DB_HOST,
+      port: Number(process.env.MYSQL_DB_PORT),
+      username: process.env.MYSQL_DB_USERNAME,
+      password: process.env.MYSQL_DB_PASSWORD,
+      database: process.env.MYSQL_DB_NAME,
+      entities: [User],
       autoLoadEntities: true,
       synchronize: false,
     }),

@@ -12,11 +12,6 @@ export class UsersController {
     return this.userService.create(body);
   }
 
-  @Post('login')
-  async login(@Body() body: loginUserDto) {
-    return this.userService.login(body);
-  }
-
   @Get(':id')
   async findByid(@Param('id', ParseIntPipe) id: number) {
     return this.userService.findById(id);

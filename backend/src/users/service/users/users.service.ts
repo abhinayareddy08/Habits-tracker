@@ -16,23 +16,10 @@ export class UserService {
   async create(data: createUserDto): Promise<User> {
     const user = await this.userRepository.findByEmail(data.email);
     if (user) {
-      throw new ConflictException('Email already in use');//409
+      throw new ConflictException('Email already in use'); //409
     }
     const hashedPassword = await bcrypt.hash(data.password, 10);
     return this.userRepository.create({ ...data, password: hashedPassword });
-  }
-
-  async login(data: loginUserDto): Promise<User | null> {
-    const user = await this.userRepository.findByEmail(data.email);
-    if (!user) {
-      throw new NotFoundException('User Not Found');//404
-    }
-    const login = await bcrypt.compare(data.password, user.password);
-
-    if (!login) {
-      throw new UnauthorizedException('Invalid Credentials');//401
-    }
-    return user;
   }
 
   async findById(id: number): Promise<User | null> {

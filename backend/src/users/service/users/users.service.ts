@@ -2,13 +2,11 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { User } from 'src/typeorm/entities/user.entity';
+import { User } from 'src/entities/user.entity';
 import { UserRepository } from 'src/repositories/user.repository';
 import { createUserDto } from 'src/users/dto/create-user.dto';
-import { loginUserDto } from 'src/users/dto/login-user.dto';
 
 @Injectable()
 export class UserService {

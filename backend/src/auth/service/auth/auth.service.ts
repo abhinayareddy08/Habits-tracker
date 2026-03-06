@@ -3,9 +3,9 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtSecretRequestType, JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import { UserRepository } from 'src/repositories/user.repository';
-import { User } from 'src/typeorm/entities/user.entity';
+import { User } from 'src/entities/user.entity';
 import { loginUserDto } from 'src/users/dto/login-user.dto';
 import * as bcrypt from 'bcrypt';
 @Injectable()

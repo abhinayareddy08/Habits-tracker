@@ -1,4 +1,4 @@
-import { User } from 'src/typeorm/entities/user.entity';
+import { User } from 'src/entities/user.entity';
 import { createUserDto } from 'src/users/dto/create-user.dto';
 
 export abstract class UserRepository {

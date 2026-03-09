@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { Habit } from './entities/habits.entity';
+import { HabitModule } from './habits/habits.module';
 
 @Module({
   imports: [
@@ -17,12 +19,13 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.MYSQL_DB_USERNAME,
       password: process.env.MYSQL_DB_PASSWORD,
       database: process.env.MYSQL_DB_NAME,
-      entities: [User],
+      entities: [User, Habit],
       autoLoadEntities: true,
       synchronize: false,
     }),
     UsersModule,
     AuthModule,
+    HabitModule,
   ],
   controllers: [AppController],
   providers: [AppService],

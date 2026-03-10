@@ -30,7 +30,7 @@ A habit tracking app with gamification (XP + levels). Users register, log in, an
 | Forms | React Hook Form + Yup validation |
 | HTTP Client | Axios |
 
----
+---xfv                        v
 
 ## Folder Structure
 

@@ -8,6 +8,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { Habit } from './entities/habits.entity';
 import { HabitModule } from './habits/habits.module';
+import { HabitLogModule } from './habit-log/habit-log.module';
+import { HabitLog } from './entities/habits-logs.entity';
 
 @Module({
   imports: [
@@ -19,13 +21,14 @@ import { HabitModule } from './habits/habits.module';
       username: process.env.MYSQL_DB_USERNAME,
       password: process.env.MYSQL_DB_PASSWORD,
       database: process.env.MYSQL_DB_NAME,
-      entities: [User, Habit],
+      entities: [User, Habit, HabitLog],
       autoLoadEntities: true,
       synchronize: false,
     }),
     UsersModule,
     AuthModule,
     HabitModule,
+    HabitLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],

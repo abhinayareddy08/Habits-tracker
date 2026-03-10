@@ -21,6 +21,13 @@ export class MysqlHabitLogRepository implements HabitLogRepository {
     return await this.repository.find({ where: { userId, date } });
   }
 
+  async findByHabitIdAndDate(
+    habitId: number,
+    date: string,
+  ): Promise<HabitLog | null> {
+    return await this.repository.findOne({ where: { habitId, date } });
+  }
+
   async delete(data: createHabitLogDto, userId: number): Promise<void> {
     await this.repository.delete({ ...data, userId });
   }

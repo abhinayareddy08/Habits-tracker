@@ -12,6 +12,7 @@ import { HabitLogModule } from './habit-log/habit-log.module';
 import { HabitLog } from './entities/habits-logs.entity';
 import { DailyEntriesModule } from './daily-entries/daily-entries.module';
 import { DailyEntry } from './entities/daily-entries.entity';
+import { GamificationModule } from './gamification/gamification.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { DailyEntry } from './entities/daily-entries.entity';
     HabitModule,
     HabitLogModule,
     DailyEntriesModule,
+    GamificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

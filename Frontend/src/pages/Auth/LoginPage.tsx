@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup
@@ -24,17 +24,21 @@ const schema = yup.object().shape({
   password: yup.string().required("Password Is Required"),
 });
 export const LoginPage = () => {
+  const navigate = useNavigate();
   const form = useForm({
     resolver: yupResolver(schema),
     defaultValues: { email: "", password: "" },
   });
 
+  
   const onSubmit = async (data: yup.InferType<typeof schema>) => {
     try {
       const response = await login(data);
       console.log(response);
       form.reset({ email: "", password: "" });
       toast.success("You Are Sucessfully Logged In");
+      localStorage.setItem("token", response.token);
+      navigate("/home");
     } catch (error: any) {
       toast.error(error?.response?.data?.message ?? "Something went wrong!");
     }

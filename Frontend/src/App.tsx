@@ -2,6 +2,7 @@ import RegisterPage from "./pages/Auth/RegisterPage";
 import { Toaster } from "sonner";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { LoginPage } from "./pages/Auth/LoginPage";
+import { HomePage } from "./pages/Home/HomePage";
 function App() {
   return (
     <>
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<Navigate to="/register" />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </>

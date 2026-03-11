@@ -16,4 +16,5 @@ export abstract class DailyEntriesRepository {
     date: string,
     userId: number,
   ): Promise<DailyEntry | null>;
+  abstract countByUserId(userId: number): Promise<number>;
 }

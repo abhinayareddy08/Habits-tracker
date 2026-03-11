@@ -27,7 +27,9 @@ export class MysqlHabitLogRepository implements HabitLogRepository {
   ): Promise<HabitLog | null> {
     return await this.repository.findOne({ where: { habitId, date } });
   }
-
+  async countByUserId(userId: number): Promise<number> {
+    return this.repository.count({ where: { userId } });
+  }
   async delete(data: createHabitLogDto, userId: number): Promise<void> {
     await this.repository.delete({ ...data, userId });
   }

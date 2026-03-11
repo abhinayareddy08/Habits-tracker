@@ -6,9 +6,14 @@ import { DailyEntriesService } from './service/daily-entries.service';
 import { DailyEntriesRepository } from 'src/repositories/daily-entries.repository';
 import { MysqlDailyEntriesRepository } from 'src/mysql-repositories/mysql-daily-entries.repository';
 import { GamificationModule } from 'src/gamification/gamification.module';
+import { AchievementsModule } from 'src/achievements/achievements.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([DailyEntry]), GamificationModule],
+  imports: [
+    TypeOrmModule.forFeature([DailyEntry]),
+    GamificationModule,
+    AchievementsModule,
+  ],
   controllers: [DailyEntriesController],
   providers: [
     DailyEntriesService,

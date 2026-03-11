@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AchievementsService } from 'src/achievements/service/achievements.service';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 
@@ -7,13 +8,18 @@ import { Repository } from 'typeorm';
 export class GamificationService {
   constructor(
     @InjectRepository(User) private readonly repository: Repository<User>,
+    private readonly achievementsService: AchievementsService,
   ) {}
   async rewardXP(userId: number, xp: number): Promise<User> {
     const user = await this.repository.findOne({ where: { id: userId } });
+    const LEVEL_MILESTONES = [2, 5, 10, 15, 20, 30, 50, 75, 100];
     if (user) {
       user.xp += xp;
       if (user.xp >= user.level * 100) {
         user.level += 1;
+        if (LEVEL_MILESTONES.includes(user.level)) {
+          await this.achievementsService.unlock(userId, `LEVEL_${user.level}`);
+        }
       }
       return await this.repository.save(user);
     } else {

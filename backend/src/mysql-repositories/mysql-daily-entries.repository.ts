@@ -43,4 +43,8 @@ export class MysqlDailyEntriesRepository implements DailyEntriesRepository {
   ): Promise<DailyEntry | null> {
     return await this.repository.findOne({ where: { date, userId } });
   }
+
+  async countByUserId(userId: number): Promise<number> {
+    return this.repository.count({ where: { userId } });
+  }
 }

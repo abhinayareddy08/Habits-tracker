@@ -6,9 +6,10 @@ import { HabitLogService } from './service/habit-log.service';
 import { HabitLogRepository } from 'src/repositories/habit-log.repository';
 import { MysqlHabitLogRepository } from 'src/mysql-repositories/mysql-habit-log.repository';
 import { GamificationModule } from 'src/gamification/gamification.module';
+import { AchievementsModule } from 'src/achievements/achievements.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([HabitLog]), GamificationModule],
+  imports: [TypeOrmModule.forFeature([HabitLog]), GamificationModule,AchievementsModule],
   controllers: [HabitLogController],
   providers: [
     HabitLogService,

@@ -13,6 +13,8 @@ import { HabitLog } from './entities/habits-logs.entity';
 import { DailyEntriesModule } from './daily-entries/daily-entries.module';
 import { DailyEntry } from './entities/daily-entries.entity';
 import { GamificationModule } from './gamification/gamification.module';
+import { AchievementsModule } from './achievements/achievements.module';
+import { Achievement } from './entities/achievements.entity';
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { GamificationModule } from './gamification/gamification.module';
       username: process.env.MYSQL_DB_USERNAME,
       password: process.env.MYSQL_DB_PASSWORD,
       database: process.env.MYSQL_DB_NAME,
-      entities: [User, Habit, HabitLog, DailyEntry],
+      entities: [User, Habit, HabitLog, DailyEntry, Achievement],
       autoLoadEntities: true,
       synchronize: false,
     }),
@@ -34,6 +36,7 @@ import { GamificationModule } from './gamification/gamification.module';
     HabitLogModule,
     DailyEntriesModule,
     GamificationModule,
+    AchievementsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -4,6 +4,10 @@ type TokenPayload = {
   exp: number
 }
 
+export const logout = () => {
+  localStorage.removeItem("token")
+}
+
 export const decodeToken = (): TokenPayload | null => {
   const token = localStorage.getItem("token")
   if (!token) return null

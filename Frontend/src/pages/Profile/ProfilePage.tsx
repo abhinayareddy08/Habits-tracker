@@ -5,7 +5,9 @@ import { Badge } from "@/components/ui/badge"
 import { Navbar } from "@/components/ui/navbar"
 import { styles } from "@/lib/styles"
 import { useProfile } from "@/hooks/useProfile"
-import { Trophy, Target, Flame, Star, Award, Crown, Zap, Shield, Lock, type LucideIcon } from "lucide-react"
+import { Trophy, Target, Flame, Star, Award, Crown, Zap, Shield, Lock, LogOut, type LucideIcon } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { logout } from "@/lib/token"
 
 const ALL_BADGES: { badgeType: string; name: string; icon: LucideIcon; color: string }[] = [
   { badgeType: "Habit_1",    name: "First Steps",    icon: Star,   color: "from-yellow-500 to-orange-500" },
@@ -20,6 +22,12 @@ const ALL_BADGES: { badgeType: string; name: string; icon: LucideIcon; color: st
 
 export const ProfilePage = () => {
   const { user, stats, achievements, xpForNextLevel, xpPercent } = useProfile()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate("/login")
+  }
 
   const unlockedTypes = new Set(achievements.map((a) => a.badgeType))
 
@@ -154,6 +162,15 @@ export const ProfilePage = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Logout */}
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 w-full justify-center py-3 px-6 rounded-xl border border-red-500/40 text-red-400 hover:bg-red-500/10 transition-colors"
+        >
+          <LogOut className="w-5 h-5" />
+          Log Out
+        </button>
 
       </div>
     </div>

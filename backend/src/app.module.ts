@@ -29,6 +29,9 @@ import { Achievement } from './entities/achievements.entity';
       entities: [User, Habit, HabitLog, DailyEntry, Achievement],
       autoLoadEntities: true,
       synchronize: false,
+      ssl: {
+        rejectUnauthorized: false, // 👈 add this
+      },
     }),
     UsersModule,
     AuthModule,

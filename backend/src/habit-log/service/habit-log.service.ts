@@ -22,6 +22,7 @@ export class HabitLogService {
     }
     const log = await this.habitLogRepository.create(data, userId);
     await this.gamificationService.rewardXP(userId, 10);
+    await this.gamificationService.updateStreak(userId);
 
     const totalHabits = await this.habitLogRepository.countByUserId(userId);
     const HABIT_MILESTONES = [
@@ -35,6 +36,10 @@ export class HabitLogService {
 
   async findByUserAndDate(userId: number, date: string) {
     return await this.habitLogRepository.findByUserAndDate(userId, date);
+  }
+
+  async getMonthlySummary(userId: number, month: string): Promise<Record<string, number>> {
+    return this.habitLogRepository.getMonthlySummary(userId, month);
   }
 
   async delete(data: createHabitLogDto, userId: number) {

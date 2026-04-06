@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -21,6 +22,15 @@ export class HabitLogController {
   @Post()
   async create(@Body() body: createHabitLogDto, @Req() req): Promise<HabitLog> {
     return await this.habitLogService.create(body, req.user.id);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('summary')
+  async getMonthlySummary(
+    @Query('month') month: string,
+    @Req() req: { user: { id: number } },
+  ): Promise<Record<string, number>> {
+    return this.habitLogService.getMonthlySummary(req.user.id, month);
   }
 
   @UseGuards(JwtGuard)

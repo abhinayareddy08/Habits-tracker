@@ -26,6 +26,10 @@ export class MysqHabitRepository implements HabitRepository {
   ): Promise<Habit | null> {
     return await this.repository.findOne({ where: { name, userId } });
   }
+  async findById(id: number): Promise<Habit | null> {
+    return await this.repository.findOne({ where: { id } });
+  }
+
   async delete(id: number): Promise<void> {
     await this.repository.delete(id);
   }

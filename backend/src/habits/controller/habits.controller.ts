@@ -30,7 +30,7 @@ export class HabitsController {
 
   @UseGuards(JwtGuard)
   @Delete(':id')
-  async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    return await this.habitService.delete(id);
+  async delete(@Param('id', ParseIntPipe) id: number, @Req() req: { user: { id: number } }): Promise<void> {
+    return await this.habitService.delete(id, req.user.id);
   }
 }

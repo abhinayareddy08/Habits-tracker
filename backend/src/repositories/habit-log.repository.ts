@@ -9,5 +9,7 @@ export abstract class HabitLogRepository {
     date: string,
   ): Promise<HabitLog | null>;
   abstract countByUserId(userId: number): Promise<number>;
+  abstract findDistinctDatesByUserId(userId: number): Promise<string[]>;
+  abstract getMonthlySummary(userId: number, month: string): Promise<Record<string, number>>;
   abstract delete(data: createHabitLogDto, userId: number): Promise<void>;
 }

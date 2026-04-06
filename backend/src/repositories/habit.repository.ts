@@ -8,5 +8,6 @@ export abstract class HabitRepository {
     name: string,
     userId: number,
   ): Promise<Habit | null>;
+  abstract findById(id: number): Promise<Habit | null>;
   abstract delete(id: number): Promise<void>;
 }

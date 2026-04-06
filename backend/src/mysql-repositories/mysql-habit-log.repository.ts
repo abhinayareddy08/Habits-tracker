@@ -30,6 +30,32 @@ export class MysqlHabitLogRepository implements HabitLogRepository {
   async countByUserId(userId: number): Promise<number> {
     return this.repository.count({ where: { userId } });
   }
+
+  async findDistinctDatesByUserId(userId: number): Promise<string[]> {
+    const rows = await this.repository
+      .createQueryBuilder('log')
+      .select('DISTINCT DATE_FORMAT(log.date, "%Y-%m-%d")', 'date')
+      .where('log.userId = :userId', { userId })
+      .orderBy('date', 'DESC')
+      .getRawMany();
+    return rows.map((row) => row.date);
+  }
+
+  async getMonthlySummary(userId: number, month: string): Promise<Record<string, number>> {
+    const rows = await this.repository
+      .createQueryBuilder('log')
+      .select('DATE_FORMAT(log.date, "%Y-%m-%d")', 'date')
+      .addSelect('COUNT(*)', 'count')
+      .where('log.userId = :userId', { userId })
+      .andWhere('DATE_FORMAT(log.date, "%Y-%m") = :month', { month })
+      .groupBy('log.date')
+      .getRawMany();
+
+    const summary: Record<string, number> = {};
+    rows.forEach((row) => { summary[row.date] = Number(row.count); });
+    return summary;
+  }
+
   async delete(data: createHabitLogDto, userId: number): Promise<void> {
     await this.repository.delete({ ...data, userId });
   }

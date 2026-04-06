@@ -6,6 +6,7 @@ import {
   Param,
   Get,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { createUserDto } from 'src/users/dto/create-user.dto';
@@ -18,6 +19,12 @@ export class UsersController {
   @Post('register')
   async register(@Body() body: createUserDto) {
     return this.userService.create(body);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('stats')
+  async getStats(@Req() req: { user: { id: number } }) {
+    return this.userService.getStats(req.user.id);
   }
 
   @UseGuards(JwtGuard)
